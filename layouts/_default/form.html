@@ -1,0 +1,43 @@
+<div class="row">
+  <div class="box">
+    <div class="col-lg-12">
+      <hr>
+      <h2 class="intro-text text-center">{{ index .Params "lead" }}
+        <strong>{{ .Title }}</strong>
+      </h2>
+      <hr>
+      <p>{{ .Content }}</p>
+      <form role="form">
+        <div class="row">
+          {{ range .Params.form }}
+          {{ if eq (index . "type") "text" }}
+          <div class="form-group col-lg-4">
+            <label>{{ index . "label" }}</label>
+            <input type="text" class="form-control">
+          </div>
+          {{ else if eq (index . "type") "email" }}
+          <div class="form-group col-lg-4">
+            <label>{{ index . "label"}}</label>
+            <input type="email" class="form-control">
+          </div>
+          {{ else if eq (index . "type") "tel" }}
+          <div class="form-group col-lg-4">
+            <label>{{ index . "label"}}</label>
+            <input type="tel" class="form-control">
+          </div>
+          {{ else if eq (index . "type") "textarea" }}
+          <div class="form-group col-lg-12">
+            <label>Message</label>
+            <textarea class="form-control" rows="6"></textarea>
+          </div>
+          {{ end }}<!-- end if -->
+          {{ end }}<!-- end Form -->
+          <div class="form-group col-lg-12">
+            <input type="hidden" name="save" value="contact">
+            <button type="submit" class="btn btn-default">Submit</button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

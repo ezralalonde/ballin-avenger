@@ -1,0 +1,15 @@
+{{ partial "head.html" . }}
+<body id="news list">
+  {{ partial "header.html" . }}
+  <div class="container">            
+    {{ range where .Data.Pages "Section" "home" }}<!-- Iterate over the pages -->
+    {{if isset .Params "triple"}}{{.Render "triple"}}
+    {{else if isset .Params "carousel"}}{{.Render "car"}}
+    {{else if isset .Params "form"}}{{.Render "form"}}
+    {{else if isset .Params "map"}}{{.Render "map"}}
+    {{ else }}{{.Render "box" }}{{end}}
+    {{ end }}
+  </div><!-- /.container -->
+  {{ partial "footer.html" . }}
+</body>
+</html>

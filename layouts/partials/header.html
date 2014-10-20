@@ -1,0 +1,42 @@
+{{ $currentPath := .UrlPath.Url }}
+{{ $baseUrl := .Site.BaseUrl }}
+<h1>{{ $currentPath }}</h1>
+<header>
+  <div class="brand">{{ .Site.Title }}</div>
+  <div class="address-bar">{{ index .Site.Params "header.address-bar" }}</div>
+  <nav class="navbar navbar-default" role="navigation"><!-- Navigation -->
+    <div class="container"><!-- Brand and toggle get grouped for better mobile display -->
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="index.html">{{ .Site.Title }}</a><!-- navbar-brand is hidden on larger screens, but visible when the menu is collapsed -->
+      </div>
+      <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1"><!-- Collect the nav links, forms, and other content for toggling -->
+        <ul class="nav navbar-nav">
+          {{ if isset .Site.Params "showall" }}
+          <li class='{{ if eq $currentPath "/" }} active {{ end }}'>
+            <a href="{{ $baseUrl }}">all</a>
+          </li>
+          {{ end }}
+          {{ if isset .Site.Params "section-order" }}
+          {{ range $key := index .Site.Params "section-order" }}
+          <li class='{{ if eq $currentPath (print "/" $key "/") }} active {{ end }}'>
+            <a href="{{ $baseUrl }}/{{ $key }}">{{ $key }}</a>
+          </li>
+          {{ end }}
+          {{ else }}
+          {{ range $key, $elem := .Site.Sections }}
+          <li class='{{ if eq $currentPath (print "/" $key "/" ) }} active {{ end }}'>
+            <a href="{{ $baseUrl }}/{{ $key }}">{{ $key }}</a>
+          </li>
+          {{ end }}
+          {{ end }}
+        </ul>
+      </div> <!-- /.navbar-collapse -->
+    </div> <!-- /.container -->
+  </nav>
+</header>

@@ -1,0 +1,9 @@
+{{ partial "head.html" . }}
+<body id="news list">
+  {{ partial "header.html" . }}
+  <div class="container">
+    {{.Render "post" }}
+  </div>
+  {{ partial "footer.html" . }}
+</body>
+</html>
